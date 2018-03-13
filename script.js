@@ -115,15 +115,15 @@ function nodeToFragment(node, vm) {
  */
 function compile(node, vm) {
   //该正则匹配的是 ：{{任意内容}}
-  var reg = /\{\{(.*)\}\}/;
+  let reg = /\{\{(.*)\}\}/;
   //节点类型为元素
   if (node.nodeType === 1) {
-    var attr = node.attributes;
+    let attr = node.attributes;
     //解析属性，不同的属性不用的处理方式，这里只写了v-model属性
-    for (var i = 0; i < attr.length; i++) {
+    for (let i = 0; i < attr.length; i++) {
       if (attr[i].nodeName == "v-model") {
         //获取节点中v-model属性的值，也就是绑定的属性名
-        var name = attr[i].nodeValue;
+        let name = attr[i].nodeValue;
 
         node.addEventListener("input", function (e) {
           //当触发input事件时改变vue.data中相应的属性的值，进而触发该属性的set方法
@@ -143,7 +143,7 @@ function compile(node, vm) {
       //获取匹配到的字符串：这里的RegExp.$1是RegExp的一个属性
       //该属性表示正则表达式reg中，第一个()里边的内容，也就是
       //{{任意内容}} 中的  文本【任意内容】
-      var name = RegExp.$1;
+      let name = RegExp.$1;
       //去掉前后空格，并将处理后的数据写入节点
       name = name.trim();
       //node.nodeValue = vm.data[name];
